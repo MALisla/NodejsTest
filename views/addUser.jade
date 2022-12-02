@@ -1,0 +1,24 @@
+include layout
+
+block content
+form(method="POST",action="/addUser")
+	div.container
+		div.rows
+			div.col-lg-12.col-sm-12
+				h1 Register Member
+				form.form-horizontal
+					div.form-group
+						label.col-sm-2.control-label Username
+						div.col-sm-10
+							input.form-control#username(placeholder="Username", type="text")
+					div.form-group
+						label.col-sm-2.control-label Password
+						div.col-sm-10
+							input.form-control#password(placeholder="Password", type="text")
+					div.form-group
+						label.col-sm-2.control-label Email
+						div.col-sm-10
+							input.form-control#email(placeholder="Email", type="text")
+					div.form-group
+						div.col-sm-offset-2.col-sm-10
+							button.btn.btn-primary#addUser(type="submit") Submit
