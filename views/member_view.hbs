@@ -1,0 +1,151 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CRUD Node.js and Mysql</title>
+  <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+  <div class="container">
+    <h2>Member List</h2>
+        <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+    <table class="table table-striped" id="mytable">
+      <thead>
+        <tr>
+          <th>Member ID</th>
+          <th>Member Username</th>
+          <th>Password</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+         {{#each results}}
+        <tr>
+          <td>{{ member_id }}</td>
+          <td>{{ member_username }}</td>
+          <td>{{ member_password }}</td>
+          <td>{{ member_email }}</td>
+          <td>
+            <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ member_id }}" data-member_username="{{ member_username }}" data-member_password="{{ member_password }}" data-member_email="{{ member_email }}">Edit</a>
+            <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-id="{{ member_id }}">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+ 
+    {{!-- <!-- Modal Add Member-->
+      <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add New Member</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+               <div class="form-group">
+                   <input type="text" name="member_username" class="form-control" placeholder="Username" required>
+               </div>
+ 
+               <div class="form-group">
+                   <input type="text" name="member_password" class="form-control" placeholder="Password" required>
+               </div>
+
+                
+               <div class="form-group">
+                   <input type="text" name="member_email" class="form-control" placeholder="Email" required>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Save</button>
+             </div>
+           </div>
+         </div>
+        </div>
+     </form>
+ 
+     <!-- Modal Update Member-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Member</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" name="member_username" class="form-control member_username" placeholder="Username" required>
+                </div>
+    
+                <div class="form-group">
+                    <input type="text" name="member_password" class="form-control member_password" placeholder="Password" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="member_email" class="form-control member_email" placeholder="Email" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" class="member_id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+ 
+     <!-- Modal Delete Member-->
+      <form id="add-row-form" action="/delete" method="post">
+         <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Delete Member</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   </div>
+                   <div class="modal-body">
+                        <strong>Are you sure to delete this data?</strong>
+                   </div>
+                   <div class="modal-footer">
+                        <input type="hidden" name="member_id" class="form-control member_id2" required>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Delete</button>
+                   </div>
+                    </div>
+            </div>
+         </div>
+     </form> --}}
+ 
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function(){
+            //showing data to edit modal      $('#mytable').on('click','.edit',function(){
+        var member_id = $(this).data('id');
+        var member_username = $(this).data('member_username');
+        var member_password = $(this).data('member_password');
+        var member_email = $(this).data('member_email');
+        $('#EditModal').modal('show');
+        $('.member_username').val(member_username);
+        $('.member_password').val(member_password);
+        $('.member_email').val(member_email);
+        $('.member_id').val(member_id);
+    });
+        //showing delete record modal
+        $('#mytable').on('click','.delete',function(){
+        var member_id = $(this).data('id');
+        $('#DeleteModal').modal('show');
+        $('.member_id2').val(member_id);
+        });
+</script>
+</body>
+</html>

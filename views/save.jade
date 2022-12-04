@@ -1,0 +1,19 @@
+extends layout
+
+block content
+		form(action="/save", method="post")
+			#myModalAdd.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+				.modal-dialog(role="document")
+					.modal-content
+						.modal-header
+							h5#exampleModalLabel.modal-title Add New Product
+							button.close(type="button", data-dismiss="modal", aria-label="Close")
+								span(aria-hidden="true") &amp;times;
+						.modal-body
+							.form-group
+								input.form-control(type="text", name="username", placeholder="Product Name", required)
+							.form-group
+								input.form-control(type="text", name="password", placeholder="Price", required)
+						.modal-footer
+							button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+							button.btn.btn-primary(type="submit") Save

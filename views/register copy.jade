@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    div
+        form(action="/postregister",method="POST")
+            input(type="hidden", name="_method", value="PUT")
+            p Name
+            input(type="text", name="username")
+            p Password
+            input(type="password", name="password")
+            p Email
+            input(type="email", name="email")
+            p
+            input(type="submit")
+
+extends layout
+
+block content
+ h1= title
+ p Welcome to #{title}
+ -var memberlist = members
+ div
+   table.table.table-hover
+    thead
+      tr
+        th Username
+        th Password
+        th Email
+    tbody
+      each member in members
+        tr
+          td=member.username
+          td=member.password
+          td=member.email
+          

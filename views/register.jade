@@ -1,8 +1,29 @@
 extends layout
 
 block content
-    div
-        form(action="/postregister",method="POST")
+  .container
+    h2 Member List
+    button.btn.btn-success(data-toggle="modal", data-target="#myModalAdd") Add New
+    table#mytable.table.table-striped
+      thead
+        tr
+          th ID
+          th Usename
+          th Password
+          th Email
+          th Action
+      tbody
+        each member in members
+          tr
+            td=member.id
+            td=member.username
+            td=member.password
+            td=member.email
+            td
+              a(class={active: currentUrl === '/update'} href='/update') Edit
+              a.btn.btn-sm.btn-info.edit(href='/update', data-id="{{ id }}", data-username="{{ username }}", data-password="{{ password }}",  data-email="{{ email }}") Edit
+              a.btn.btn-sm.btn-danger.delete(href="javascript:void(0);", data-id="{{ id }}") Delete
+        form(action="/save",method="POST")
             input(type="hidden", name="_method", value="PUT")
             p Name
             input(type="text", name="username")
@@ -12,4 +33,40 @@ block content
             input(type="email", name="email")
             p
             input(type="submit")
-          
+        form(action="/save", method="post")
+          #myModalAdd.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+            .modal-dialog(role="document")
+              .modal-content
+                .modal-header
+                  h5#exampleModalLabel.modal-title Add New Product
+                  button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &amp;times;
+                .modal-body
+                  .form-group
+                    input.form-control(type="text", name="product_name", placeholder="Product Name", required)
+                  .form-group
+                    input.form-control(type="text", name="product_price", placeholder="Price", required)
+                .modal-footer
+                  button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+                  button.btn.btn-primary(type="submit") Save
+   
+
+//- script.
+//-       $(document).ready(function(){
+//-       //showing data to edit modal      $('#mytable').on('click','.edit',function(){
+//-       var id = $(this).data('id');
+//-       var username = $(this).data('username');
+//-       var password = $(this).data('password');
+//-       var email = $(this).data('email');
+//-       $('#EditModal').modal('show');
+//-       $('.username').val(username);
+//-       $('.password').val(password);
+//-       $('.email').val(email);
+//-       $('.id').val(id);
+//-       });
+//-       //showing delete record modal
+//-       $('#mytable').on('click','.delete',function(){
+//-       var id = $(this).data('id');
+//-       $('#DeleteModal').modal('show');
+//-       $('.id2').val(id);
+//-       });

@@ -3,9 +3,9 @@ const config = {
     db: {
       /* don't expose password or any sensitive info, done only for demo */
       host: "db4free.net",
-      user: "bbcartoon",
-      password: "P@ssw0rd",
-      database: "bigboss",
+      user: "bbcorn",
+      password: "Toon21132113",
+      database: "bigbossa",
     }
   };
   

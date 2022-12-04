@@ -1,0 +1,19 @@
+    form(action="/update", method="post")
+      #EditModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Edit Member
+              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                span(aria-hidden="true") &amp;times;
+            .modal-body
+                .form-group
+                    input(type="text", name="username", class="form-control username", placeholder="Username", required)
+                .form-group
+                    input.form-control.password(type="text", name="password", placeholder="Password", required)
+                .form-group
+                    input.form-control.email(type="text", name="email", placeholder="Email", required)
+            .modal-footer
+              input(type="hidden", name="id", class="id")
+              button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+              button.btn.btn-primary(type="submit") Update

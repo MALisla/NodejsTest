@@ -17,3 +17,17 @@ block content
           td=member.username
           td=member.password
           td=member.email
+
+
+
+    div
+        form(action="/postregister",method="POST")
+            input(type="hidden", name="_method", value="PUT")
+            p Name
+            input(type="text", name="username")
+            p Password
+            input(type="password", name="password")
+            p Email
+            input(type="email", name="email")
+            p
+            input(type="submit")
